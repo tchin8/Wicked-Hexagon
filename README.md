@@ -24,17 +24,18 @@ Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com
 - Render central hexagon and cursor.
 ### Day 2
 - Render stopwatch.
-- Implement user control (space key) to pause and stop the game/stopwatch.
+- Implement user control (space key) to pause and stop the game.
 ### Day 3
 - Implement user controls (A/D or left/right arrows) to pivot the cursor.
 - Implement canvas rotation.
-- Render various random walls.
+- Render random walls.
 ### Day 4
 - Complete all game logic.
-- Implement sounds and background song.
+  - Players lose when a wall touches the cursor.
+- Implement sounds and background music.
 
 ## Bonus Features
 - Levels
   - As the game progresses, the canvas may pulsate, change shape and/or direction.
 - Scoreboard
-  - Players may keep track of their highest scores on a scoreboard.
+  - Players can keep track of their longest plays.
