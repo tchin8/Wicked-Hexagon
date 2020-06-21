@@ -12,10 +12,10 @@ Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com
 
 ## Wireframe
 
-## Architexture and Technology
+## Architecture and Technology
 - JavaScript for game logic
 - HTML5 Canvas for rendering
-- Webpack to bundle JS scripts
+- Webpack to bundle scripts
 
 ## Implementation Timeline 
 ### Day 1
@@ -34,7 +34,7 @@ Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com
 - Implement sounds and background song.
 
 ## Bonus Features
-- difficulty levels?
-  - Pentagon ? 
-- pulsating canvas ?
+- Levels
+  - As the game progresses, the canvas may pulsate, change shape and/or direction.
 - Scoreboard
+  - Players may keep track of their highest scores on a scoreboard.
