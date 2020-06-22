@@ -1,7 +1,7 @@
 # Wicked Hexagon
 
 ## Background and Overview
-Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com/). Wicked Hexagon is a simple, face-paced game that features a user-controlled cursor that pivots around a hexagon, while avoiding incoming walls. 
+Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com/). Wicked Hexagon is a simple, fast-paced game that features a user-controlled cursor that pivots around a hexagon, while avoiding incoming walls. 
 
 ## Functionality and MVPs
 - Players can press space to pause and play the game.
