@@ -11,6 +11,9 @@ Wicked Hexagon is a Javascript clone of [Super Hexagon](https://superhexagon.com
 - A stopwatch in the upper right corner will keep track of how long the player has survived.
 
 ## Wireframe
+Incoming walls appear from the sides of the canvas to meet the walls of the central hexagon. The player controls the cursor, which pivots around the central hexagon. To survive, the cursor cannot touch any of the incoming walls.
+
+![wireframe](wireframe.jpeg)
 
 ## Architecture and Technology
 - JavaScript for game logic
