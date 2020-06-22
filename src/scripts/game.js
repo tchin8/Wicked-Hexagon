@@ -1,6 +1,7 @@
 import Stopwatch from './stopwatch';
 import Hexagon from './hexagon';
 import Cursor from './cursor';
+import Sections from './sections';
 // import the other scripts
 
 export default class WickedHexagon {
@@ -11,6 +12,8 @@ export default class WickedHexagon {
     this.restart();
 
     // this.stopwatch = new Stopwatch;
+    this.sections = new Sections(canvas);
+    this.ctx.globalCompositeOperation = 'source-over';
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
   }
