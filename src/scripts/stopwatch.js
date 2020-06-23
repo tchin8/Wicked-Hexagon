@@ -6,7 +6,7 @@ export default class Stopwatch {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.time = "0.00"
+    this.time = "0.00";
 
     // only draw when starting the game/ space button
     this.draw(this.ctx);
@@ -38,7 +38,7 @@ export default class Stopwatch {
     body[0].appendChild(stopwatch);
   }
 
-  start() {
-    
+  start(startTime) {
+    // const secs 
   }
 }

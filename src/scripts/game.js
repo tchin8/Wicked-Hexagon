@@ -20,8 +20,12 @@ export default class WickedHexagon {
 
   play() {
     this.running = true;
-    this.animate();
-    this.stopwatch.start();
+    let t = new Date()
+    this.animate(t);
+  }
+
+  animate(t) {
+    this.stopwatch.start(t);
     // rotate sections
     // rotate hexagon
     // rotate cursor
@@ -39,7 +43,7 @@ export default class WickedHexagon {
     this.leftHandler = this.pivotClockwise.bind(this);
     this.rightHandler = this.pivotCounterClockwise.bind(this);
     this.playGame = this.play.bind(this);
-    this.ctx.canvas.addEventListener("mousedown", function(event) {
+    this.ctx.canvas.addEventListener("keydown", function(event) {
       if (event.keyCode === 37 || event.keyCode === 65) {
         return this.leftHandler;
       } else if (event.keyCode === 39 || event.keyCode === 68) {
