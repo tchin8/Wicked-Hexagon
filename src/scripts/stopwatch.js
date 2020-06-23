@@ -37,4 +37,8 @@ export default class Stopwatch {
     stopwatch.innerHTML = this.time;
     body[0].appendChild(stopwatch);
   }
+
+  start() {
+    
+  }
 }
