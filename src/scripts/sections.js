@@ -6,7 +6,7 @@ export default class Sections {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.angle = 0;
+    this.angle = -60;
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     
@@ -16,13 +16,19 @@ export default class Sections {
   draw(ctx) {
     let prevCoord;
 
+    // ctx.translate(this.x, this.y);
+    // ctx.rotate(this.angle * Math.PI / 180);
+    // ctx.translate(-this.x, -this.y);
     for (let i = 0; i <= 6; i++) {
-      this.angle = this.angle + 60;
-      if (this.angle < 0) {
-        this.angle = 360 - this.angle;
-      } else if (this.angle > 360) {
-        this.angle = this.angle % 360;
+      if (i !== 0) {
+        this.angle = this.angle + 60;
       }
+
+      // if (this.angle < 0) {
+      //   this.angle = 360 - this.angle;
+      // } else if (this.angle > 360) {
+      //   this.angle = this.angle % 360;
+      // }
 
       let x2, y2, length;
 
@@ -45,4 +51,13 @@ export default class Sections {
       prevCoord = [x2, y2];
     }
   }
+
+  animate(deltaTime) {
+    // this.angle += (1 / deltaTime);
+    // console.log(deltaTime);
+    this.draw(this.ctx);
+    // this.ctx.translate(this.x, this.y);
+    // this.ctx.rotate(this.angle * Math.PI / 180);
+    // this.ctx.translate(-this.x, -this.y);
+  }  
 }

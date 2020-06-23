@@ -3,21 +3,47 @@ html, body {
   position: relative;
   color: #ffffff;
   font-family: 'Squada One', cursive;
+  overflow-x: hidden; 
+  overflow-y: hidden; 
 
- .time-word {
-   font-size: 36px;
-   position: absolute;
-   z-index: 999;
-   right: 160px;
- }
+  div.container {
+    background-color: black;
+    height: 38px;
+    min-width: 270px;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    transform: skewX(45deg);
 
- .stopwatch {
-   background-color: #000000;
-   font-size: 50px;
-   position: absolute;
-   z-index: 999;
-   right: 16px;
-   padding-left: 10px;
- }
+    .time-word {
+      color: white;
+      font-size: 36px;
+      position: absolute;
+      left: 30px;
+      transform: skewX(-45deg);
+    }
+
+    div.inner-container {
+      background-color: black;
+      height: 54px;
+      min-width: 160px;
+      position: absolute;
+      right: 10px;
+      transform: none;
+     
+      .stopwatch {
+        background-color: #000000;
+        display: inline-block;
+        font-size: 50px;
+        position: relative;
+        right: -30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        transform: skewX(-45deg);
+      }
+    }
+
+  }
+
 }
 

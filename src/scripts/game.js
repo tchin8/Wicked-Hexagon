@@ -26,27 +26,29 @@ class WickedHexagon {
     // this.running = true;
     
     // // what is this event?
-    // let timestamp = new Date()
-    // this.lastTime = 0;
-    
-    console.log('playfx');
+    let timestamp = new Date()
+    this.lastTime = 0;
     
     this.startTime = new Date();
 
-    this.animate();
+    this.animate(timestamp);
   }
   
-  animate() {
+  animate(timestamp) {
     // // what are these even for?
-    // let deltaTime = timestamp - this.lastTime;
-    // this.lastTime = timestamp;
+    let deltaTime = timestamp - this.lastTime;
+    this.lastTime = timestamp;
 
     // idk man
     // this.ctx.clearRect(0, 0, this.x, this.y);
     this.stopwatch.animate(this.startTime);
+    // this.cursor.animate(deltaTime, this.ctx);
+    // this.cursor.draw(this.ctx);
+    this.sections.animate(deltaTime);
+    this.hexagon.animate(deltaTime);
+
     // rotate sections
     // rotate hexagon
-    // rotate cursor - update(deltaTime)
 
     // console.log('animating');
     if (this.running = true) {

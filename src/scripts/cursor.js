@@ -2,13 +2,12 @@ const DEFAULTS = {
   COLOR: "#08fb7b",
   RADIUS: 60,
   SIZE: 5,
-  VEL: 0,
 };
 
 export default class Cursor {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
-    this.angle = 330;
+    this.angle = 270;
     this.x = (canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
     this.y = (canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
 
@@ -27,5 +26,10 @@ export default class Cursor {
     ctx.lineTo(this.x - DEFAULTS.SIZE, this.y + DEFAULTS.SIZE);
     ctx.fillStyle = DEFAULTS.COLOR;
     ctx.fill();
+  }
+
+  animate(dt, ctx) {
+    // this.angle += 30;
+    this.draw(ctx)
   }
 }
