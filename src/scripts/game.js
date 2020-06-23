@@ -11,9 +11,9 @@ export default class WickedHexagon {
     this.registerEvents();
     this.restart();
 
-    // this.stopwatch = new Stopwatch;
     this.sections = new Sections(canvas);
     this.ctx.globalCompositeOperation = 'source-over';
+    this.stopwatch = new Stopwatch(canvas);
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
   }

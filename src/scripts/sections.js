@@ -14,8 +14,6 @@ export default class Sections {
   }
 
   draw(ctx) {
-    // // do I even need this?
-    // ctx.translate(this.x, this.y);
     let prevCoord;
 
     for (let i = 0; i <= 6; i++) {
