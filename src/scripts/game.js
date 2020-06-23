@@ -1,6 +1,7 @@
 import Stopwatch from './stopwatch';
 import Hexagon from './hexagon';
 import Cursor from './cursor';
+import Sections from './sections';
 // import the other scripts
 
 export default class WickedHexagon {
@@ -10,14 +11,28 @@ export default class WickedHexagon {
     this.registerEvents();
     this.restart();
 
-    // this.stopwatch = new Stopwatch;
+    this.sections = new Sections(canvas);
+    this.ctx.globalCompositeOperation = 'source-over';
+    this.stopwatch = new Stopwatch(canvas);
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
   }
 
   play() {
     this.running = true;
-    this.animate();
+    let timestamp = new Date()
+    this.animate(timestamp);
+    this.lastTime = 0;
+    let t = new Date();
+    this.stopwatch.start(t);
+  }
+
+  animate(timestamp) {
+    let deltaTime = timestamp - this.lastTime;
+    this.lastTime = timestamp;
+    // rotate sections
+    // rotate hexagon
+    // rotate cursor - update(deltaTime)
   }
 
   pivotClockwise() {
@@ -31,11 +46,14 @@ export default class WickedHexagon {
   registerEvents() {
     this.leftHandler = this.pivotClockwise.bind(this);
     this.rightHandler = this.pivotCounterClockwise.bind(this);
-    this.ctx.canvas.addEventListener("mousedown", function(event) {
+    this.playGame = this.play.bind(this);
+    this.ctx.canvas.addEventListener("keydown", function(event) {
       if (event.keyCode === 37 || event.keyCode === 65) {
         return this.leftHandler;
       } else if (event.keyCode === 39 || event.keyCode === 68) {
         return this.rightHandler;
+      } else if (event.keyCode === 32) {
+        return this.playGame;
       }
     });
   }
