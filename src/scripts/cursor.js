@@ -2,6 +2,7 @@ const DEFAULTS = {
   COLOR: "#08fb7b",
   RADIUS: 60,
   SIZE: 5,
+  VEL: 0,
 };
 
 export default class Cursor {
@@ -15,6 +16,7 @@ export default class Cursor {
   }
 
   draw(ctx) {
+    // right, vel + 30?
     // rotates the cursor depending on where around the hexagon it is
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle * Math.PI / 180);
