@@ -41,11 +41,12 @@ class WickedHexagon {
 
     // idk man
     // this.ctx.clearRect(0, 0, this.x, this.y);
+    this.ctx.moveTo(this.x, this.y);
     this.stopwatch.animate(this.startTime);
-    // this.cursor.animate(deltaTime, this.ctx);
     // this.cursor.draw(this.ctx);
     this.sections.animate(deltaTime);
     this.hexagon.animate(deltaTime);
+    this.cursor.animate(deltaTime, this.ctx);
 
     // rotate sections
     // rotate hexagon

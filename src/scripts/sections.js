@@ -54,10 +54,6 @@ export default class Sections {
 
   animate(deltaTime) {
     // this.angle += (1 / deltaTime);
-    // console.log(deltaTime);
     this.draw(this.ctx);
-    // this.ctx.translate(this.x, this.y);
-    // this.ctx.rotate(this.angle * Math.PI / 180);
-    // this.ctx.translate(-this.x, -this.y);
   }  
 }

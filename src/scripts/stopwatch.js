@@ -12,25 +12,9 @@ export default class Stopwatch {
   }
 
   draw() {
-
-    const container = document.createElement("div");
-    container.classList.add('container');
-    const body = document.getElementsByTagName("body");
-    body[0].appendChild(container);
-
-    const innerContainer = document.createElement("div");
-    innerContainer.classList.add('inner-container');
-    container.appendChild(innerContainer);
-
-    const timeWord = document.createElement("span");
-    timeWord.classList.add("time-word");
-    timeWord.innerHTML = "TIME";
-    container.appendChild(timeWord);
-
-    const stopwatch = document.createElement("span");
-    stopwatch.classList.add("stopwatch");
-    stopwatch.innerHTML = `${this.time}`;
-    innerContainer.appendChild(stopwatch);
+    const stopwatch = document.getElementsByClassName("stopwatch");
+    stopwatch[0].innerHTML = "";
+    stopwatch[0].innerHTML += `${this.time}`;
   }
 
   countDecimals(num) {
