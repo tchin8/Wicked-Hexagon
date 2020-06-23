@@ -38,7 +38,7 @@ export default class Stopwatch {
     body[0].appendChild(stopwatch);
   }
 
-  start(startTime) {
+  update(deltaTime) {
     // const secs 
   }
 }

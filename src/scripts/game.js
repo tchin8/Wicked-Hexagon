@@ -20,15 +20,19 @@ export default class WickedHexagon {
 
   play() {
     this.running = true;
-    let t = new Date()
-    this.animate(t);
+    let timestamp = new Date()
+    this.animate(timestamp);
+    this.lastTime = 0;
+    let t = new Date();
+    this.stopwatch.start(t);
   }
 
-  animate(t) {
-    this.stopwatch.start(t);
+  animate(timestamp) {
+    let deltaTime = timestamp - this.lastTime;
+    this.lastTime = timestamp;
     // rotate sections
     // rotate hexagon
-    // rotate cursor
+    // rotate cursor - update(deltaTime)
   }
 
   pivotClockwise() {
