@@ -1,3 +1,23 @@
 html, body {
   margin: 0;
+  position: relative;
+  color: #ffffff;
+  font-family: 'Squada One', cursive;
+
+ .time-word {
+   background-color: black;
+   font-size: 36px;
+   position: absolute;
+   z-index: 999;
+   right: 160px;
+ }
+
+ .stopwatch {
+   background-color: black;
+   font-size: 50px;
+   position: absolute;
+   z-index: 999;
+   right: 20px;
+ }
 }
+

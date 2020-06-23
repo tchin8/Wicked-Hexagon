@@ -1,10 +1,13 @@
+const DEFAULTS = {
+  COLORS: ["#000000", "#08fb7b"],
+  SIZE: 50,
+}
+
 export default class Hexagon {
   constructor(canvas) {
-    this.canvas = canvas;
-    this.x = this.canvas.width / 2;
-    this.y = this.canvas.height / 2;
-
     this.ctx = canvas.getContext("2d");
+    this.x = canvas.width / 2;
+    this.y = canvas.height / 2;
 
     this.draw(this.ctx);
   }
@@ -13,23 +16,23 @@ export default class Hexagon {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
 
-    let side = 0;
-    for (side; side <= 6; side++) {
-      ctx.lineTo(this.x + 50 * Math.cos(side * 2 * Math.PI / 6), this.y + 50 * Math.sin(side * 2 * Math.PI / 6));
+    let hex1 = 0;
+    for (hex1; hex1 <= 6; hex1++) {
+      ctx.lineTo(this.x + DEFAULTS.SIZE * Math.cos(hex1 * 2 * Math.PI / 6), this.y + DEFAULTS.SIZE * Math.sin(hex1 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = "#02ff8d";
+    ctx.fillStyle = DEFAULTS.COLORS[1];
     ctx.fill();
 
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
 
-    let side2 = 0;
-    for (side2; side2 <= 6; side2++) {
-      ctx.lineTo(this.x + 44 * Math.cos(side2 * 2 * Math.PI / 6), this.y + 44 * Math.sin(side2 * 2 * Math.PI / 6));
+    let hex2 = 0;
+    for (hex2; hex2 <= 6; hex2++) {
+      ctx.lineTo(this.x + 44 * Math.cos(hex2 * 2 * Math.PI / 6), this.y + 44 * Math.sin(hex2 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = DEFAULTS.COLORS[0];
     ctx.fill();
   }
 
