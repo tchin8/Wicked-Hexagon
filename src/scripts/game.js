@@ -20,6 +20,8 @@ class WickedHexagon {
     this.stopwatch = new Stopwatch(canvas);
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
+
+    this.music = new Audio('assets/sounds/Cusp.mp3');
   }
 
   play() {
@@ -32,6 +34,7 @@ class WickedHexagon {
     this.startTime = new Date();
 
     this.animate(timestamp);
+    this.music.play();
   }
   
   animate(timestamp) {
