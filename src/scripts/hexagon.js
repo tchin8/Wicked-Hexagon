@@ -17,6 +17,10 @@ export default class Hexagon {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
 
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle * Math.PI / 180);
+    ctx.translate(-this.x, -this.y);
+
     let hex1 = 0;
     for (hex1; hex1 <= 6; hex1++) {
       ctx.lineTo(this.x + DEFAULTS.SIZE * Math.cos(hex1 * 2 * Math.PI / 6), this.y + DEFAULTS.SIZE * Math.sin(hex1 * 2 * Math.PI / 6));
@@ -38,7 +42,7 @@ export default class Hexagon {
   }
 
   animate(deltaTime) {
-    // this.angle = (20 / deltaTime);
+    this.angle = (20 / deltaTime);
     this.draw(this.ctx);
   }
 }

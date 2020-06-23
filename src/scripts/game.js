@@ -21,51 +21,43 @@ class WickedHexagon {
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
 
+    this.cursorDir = '';
     this.music = new Audio('assets/sounds/Cusp.mp3');
   }
 
   play() {
     // this.running = true;
     
-    // // what is this event?
     let timestamp = new Date()
     this.lastTime = 0;
-    
     this.startTime = new Date();
 
-    this.animate(timestamp);
-    this.music.play();
+    setTimeout(() => this.animate(timestamp), 300);
+
+    // // comment back in later
+    // this.music.play();
   }
   
   animate(timestamp) {
-    // // what are these even for?
     let deltaTime = timestamp - this.lastTime;
+
+    this.deltaTime = deltaTime;
     this.lastTime = timestamp;
 
-    // idk man
-    // this.ctx.clearRect(0, 0, this.x, this.y);
-    this.ctx.moveTo(this.x, this.y);
     this.stopwatch.animate(this.startTime);
-    // this.cursor.draw(this.ctx);
     this.sections.animate(deltaTime);
     this.hexagon.animate(deltaTime);
-    this.cursor.animate(deltaTime, this.ctx);
+    this.cursor.animate(this.ctx);
 
-    // rotate sections
-    // rotate hexagon
+    if (this.cursorDir === 'clockwise') {
+      this.cursor.pivotClockwise(deltaTime, this.ctx);
+    } else if (this.cursorDir === 'counterClockwise') {
+      this.cursor.pivotCounterClockwise(deltaTime, this.ctx);
+    }
 
-    // console.log('animating');
     if (this.running = true) {
       requestAnimationFrame(this.animate.bind(this));
     }
-  }
-
-  pivotClockwise() {
-
-  }
-
-  pivotCounterClockwise() {
-
   }
 
   registerEvents() {
@@ -73,17 +65,21 @@ class WickedHexagon {
 
     document.addEventListener("keydown", function(event) {
       if (event.keyCode === 37 || event.keyCode === 65) {
-        console.log('left?');
-        that.pivotClockwise();
+        if (that.running) {
+          that.cursorDir = 'counterClockwise';
+        }
       } else if (event.keyCode === 39 || event.keyCode === 68) {
-        console.log('right?');
-        that.pivotCounterClockwise();
+        if (that.running) {
+          that.cursorDir = 'clockwise';
+        }
       } else if (event.keyCode === 32) {
         console.log('space');
         that.running = true;
         that.play();
       }
     });
+
+    document.addEventListener("keyup", () => (that.cursorDir = ''));
   }
 
   restart() {
