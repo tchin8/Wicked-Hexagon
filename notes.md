@@ -77,3 +77,5 @@ export default class Cursor {
 }
 
 
+let o = [[{length: 500, isWall: true}, {length: 500, isWall: true}], 
+[{length: 500, isWall: true}, {length: 500, isWall: true}]]

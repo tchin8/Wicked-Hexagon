@@ -24,7 +24,7 @@ export default class Sections {
       let x2, y2, length;
 
       // length = Math.floor(Math.sqrt(3) * this.x * 2);
-      length = 500;
+      length = 1500;
       x2 = this.x + Math.cos(Math.PI * this.angle / 180) * length;
       y2 = this.y + Math.sin(Math.PI * this.angle / 180) * length;
 

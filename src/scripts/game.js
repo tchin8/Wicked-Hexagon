@@ -7,6 +7,7 @@ import Walls from './walls';
 
 class WickedHexagon {
   constructor(canvas) {
+    this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
     this.running = false;
@@ -22,23 +23,21 @@ class WickedHexagon {
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
 
-    this.walls = new Walls(canvas);
-
     this.cursorDir = '';
     this.music = new Audio('assets/sounds/Cusp.mp3');
   }
 
   play() {
-    // this.running = true;
-    
     let timestamp = new Date()
     this.lastTime = 0;
     this.startTime = new Date();
 
     setTimeout(() => this.animate(timestamp), 300);
 
-    // // comment back in later
-    // this.music.play();
+    this.walls = new Walls(this.canvas);
+
+    // comment back in later
+    this.music.play();
   }
   
   animate(timestamp) {
@@ -51,9 +50,7 @@ class WickedHexagon {
     this.sections.animate(deltaTime);
     this.hexagon.animate(deltaTime);
     this.cursor.animate(this.ctx);
-    this.walls.animate();
-
-    setTimeout(() => this.walls.populateWalls(), 1000);
+    this.walls.animate(this.ctx);
 
     if (this.cursorDir === 'clockwise') {
       this.cursor.pivotClockwise(deltaTime, this.ctx);
