@@ -2,12 +2,27 @@ import Stopwatch from './stopwatch';
 import Hexagon from './hexagon';
 import Cursor from './cursor';
 import Sections from './sections';
+import Walls from './walls';
 // import the other scripts
 
-export default class WickedHexagon {
+const COLORS = [
+  // base, sections, cursor/walls   ~ // black to color // white to color
+  ["#000000", "#022713", "#08fb7b"],    // black/green
+  ["#000000", "#261501", "#ef8708"],    // black/orange
+  ["#ffffff", "#f5dcf0", "#c31e9e"],    // white/pink
+  ["#ffffff", "#e7e3f7", "#6b4aca"],    // white/purple
+  ["#ffffff", "#dde8fc", "#2b6aea"],    // white/blue
+]
+
+class WickedHexagon {
   constructor(canvas) {
+    this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.dimensions = { width: canvas.width, height: canvas.height };
+    this.running = false;
+    this.x = canvas.width;
+    this.y = canvas.height;
+
     this.registerEvents();
     this.restart();
 
@@ -16,49 +31,76 @@ export default class WickedHexagon {
     this.stopwatch = new Stopwatch(canvas);
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
+
+    this.cursorDir = '';
+    this.music = new Audio('assets/sounds/Cusp.mp3');
   }
 
   play() {
-    this.running = true;
     let timestamp = new Date()
-    this.animate(timestamp);
     this.lastTime = 0;
-    let t = new Date();
-    this.stopwatch.start(t);
-  }
+    this.startTime = new Date();
 
+    setTimeout(() => this.animate(timestamp), 300);
+
+    this.walls = new Walls(this.canvas);
+
+    // // comment back in later
+    // this.music.play();
+  }
+  
   animate(timestamp) {
     let deltaTime = timestamp - this.lastTime;
+
+    this.deltaTime = deltaTime;
     this.lastTime = timestamp;
-    // rotate sections
-    // rotate hexagon
-    // rotate cursor - update(deltaTime)
-  }
 
-  pivotClockwise() {
+    this.stopwatch.animate(this.startTime);
+    this.sections.animate(deltaTime);
+    this.hexagon.animate(deltaTime);
+    this.cursor.animate(this.ctx);
+    this.walls.animate(this.ctx);
 
-  }
+    if (this.cursorDir === 'clockwise') {
+      this.cursor.pivotClockwise(deltaTime, this.ctx);
+    } else if (this.cursorDir === 'counterClockwise') {
+      this.cursor.pivotCounterClockwise(deltaTime, this.ctx);
+    }
 
-  pivotCounterClockwise() {
-
+    if (this.running = true) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
   }
 
   registerEvents() {
-    this.leftHandler = this.pivotClockwise.bind(this);
-    this.rightHandler = this.pivotCounterClockwise.bind(this);
-    this.playGame = this.play.bind(this);
-    this.ctx.canvas.addEventListener("keydown", function(event) {
+    let that = this;
+
+    document.addEventListener("keydown", function(event) {
       if (event.keyCode === 37 || event.keyCode === 65) {
-        return this.leftHandler;
+        if (that.running) {
+          that.cursorDir = 'counterClockwise';
+        }
       } else if (event.keyCode === 39 || event.keyCode === 68) {
-        return this.rightHandler;
+        if (that.running) {
+          that.cursorDir = 'clockwise';
+        }
       } else if (event.keyCode === 32) {
-        return this.playGame;
+        console.log('space');
+        that.running = true;
+        that.play();
       }
     });
+
+    document.addEventListener("keyup", () => (that.cursorDir = ''));
   }
 
   restart() {
 
   }
+
+  gameOver() {
+    this.running = false;
+  }
 }
+
+export default WickedHexagon;

@@ -3,11 +3,12 @@ const DEFAULTS = {
   SIZE: 50,
 }
 
-export default class Hexagon {
+class Hexagon {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
+    this.angle = 0;
 
     this.draw(this.ctx);
   }
@@ -15,6 +16,10 @@ export default class Hexagon {
   draw(ctx) {
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
+
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle * Math.PI / 180);
+    ctx.translate(-this.x, -this.y);
 
     let hex1 = 0;
     for (hex1; hex1 <= 6; hex1++) {
@@ -36,7 +41,10 @@ export default class Hexagon {
     ctx.fill();
   }
 
-  rotate() {
-    
+  animate(deltaTime) {
+    this.angle = (20 / deltaTime);
+    this.draw(this.ctx);
   }
 }
+
+export default Hexagon;
