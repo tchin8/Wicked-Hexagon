@@ -16,11 +16,13 @@ export default class Cursor {
     this.draw(this.ctx);
   }
 
-  draw(ctx) {
-    // debugger;
-    // right, vel + 30?
-    // rotates the cursor depending on where around the hexagon it is
+  tip() {
+    let x = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS + DEFAULTS.SIZE));
+    let y = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS + DEFAULTS.SIZE));
+    return [x, y];
+  }
 
+  draw(ctx) {
     this.cursorX = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
     this.cursorY = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
 

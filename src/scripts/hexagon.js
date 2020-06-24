@@ -45,6 +45,10 @@ class Hexagon {
     this.angle = (20 / deltaTime);
     this.draw(this.ctx);
   }
+
+  stop() {
+    this.angle = 0;
+  }
 }
 
 export default Hexagon;

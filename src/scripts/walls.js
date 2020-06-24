@@ -27,8 +27,6 @@ class Walls {
     ]
 
     this.wallCombos = [];
-    
-    setInterval(() => this.populateWalls(), 1000);
   }
 
   draw (ctx, combo) {
@@ -39,12 +37,16 @@ class Walls {
         this.angle = this.angle + 60;
       }
 
+      if (this.angle >= 360) {
+        this.angle = this.angle % 360;
+      }
+
       let x2, y2, ax, ay, bx, by;
-      // center point
+      // outter trapezoid corner
       x2 = this.x + Math.cos(Math.PI * this.angle / 180) * DEFAULTS.MAX;
       y2 = this.y + Math.sin(Math.PI * this.angle / 180) * DEFAULTS.MAX;
 
-      // tapezoid point on first line 
+      // inner tapezoid point on first line 
       bx = this.x + Math.cos(Math.PI * this.angle / 180) * (DEFAULTS.MAX - DEFAULTS.SIZE);
       by = this.y + Math.sin(Math.PI * this.angle / 180) * (DEFAULTS.MAX - DEFAULTS.SIZE); 
 
@@ -92,11 +94,43 @@ class Walls {
     this.wallCombos.push(walls);
   }
 
+  collidesWith(cursorPos) {
+    if (this.wallCombos.length !== 0) {
+      for (let j = 0; j < this.wallCombos.length; j++) {
+        let walls = this.wallCombos[j];
+
+        for (let i = 1; i < walls.length; i++) {
+          let wall = walls[i];
+  
+          if (wall.isWall) {
+            const [x, y] = cursorPos;
+            const [ax, ay] = wall.point1;
+            const [bx, by] = wall.point2;
+  
+            let length1 = this.getDistance(x, y, ax, ay);
+            let length2 = this.getDistance(x, y, bx, by);
+            
+            if (length1 + length2 <= wall.length - 39) {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+  }
+
+  getDistance(ax, ay, bx, by) {
+    const x = ax - bx;
+    const y = ay - by;
+
+    return Math.sqrt(x * x + y * y);
+  }
+
   populateWalls() {
     let combosIdx = Math.floor(Math.random() * 8);
     let combo = this.combos[combosIdx];
-    console.log(combosIdx);
-    console.log(combo);
 
     this.draw(this.ctx, combo);
   }
@@ -107,7 +141,7 @@ class Walls {
       for (let i = 0; i < this.wallCombos.length; i++) {
         let walls = this.wallCombos[i];
 
-        if (walls[0].length === 80) {
+        if (walls[0].length === 70) {
           this.wallCombos.unshift();
           continue;
         }
@@ -119,6 +153,10 @@ class Walls {
 
           if (wall.isWall !== 'line') {
             this.animateWallAngle = this.animateWallAngle + 60;
+          }
+
+          if (this.animateWallAngle >= 360) {
+            this.animateWallAngle = this.animateWallAngle % 360;
           }
   
           let x2, y2, ax, ay, bx, by, newLength;
@@ -162,6 +200,9 @@ class Walls {
           this.wallCombos[i][j] = {
             length: newLength,
             isWall: wall.isWall,
+            angle: this.animateWallAngle,
+            point1: [ax, ay],
+            point2: [bx, by],
           }
         }
       }

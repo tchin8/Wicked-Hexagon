@@ -36,6 +36,11 @@ class Stopwatch {
 
     this.draw(this.ctx);
   }
+
+  stop() {
+    let time = this.time;
+    this.time = time;
+  }
 }
 
 export default Stopwatch;

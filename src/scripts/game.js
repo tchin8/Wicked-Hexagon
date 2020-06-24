@@ -33,10 +33,14 @@ class WickedHexagon {
     this.cursor = new Cursor(canvas);
 
     this.cursorDir = '';
+
     this.music = new Audio('assets/sounds/Cusp.mp3');
+    this.beginAudio = new Audio('assets/sounds/begin.mp3');
+    this.gameOverAudio = new Audio('assets/sounds/game_over.mp3');
   }
 
   play() {
+    this.running = true;
     let timestamp = new Date()
     this.lastTime = 0;
     this.startTime = new Date();
@@ -45,8 +49,14 @@ class WickedHexagon {
 
     this.walls = new Walls(this.canvas);
 
-    // // comment back in later
-    // this.music.play();
+    this.beginAudio.play();
+    this.populateWalls = setInterval(() => this.walls.populateWalls(), 1000);
+    this.music.play();
+  }
+
+
+  restart() {
+    
   }
   
   animate(timestamp) {
@@ -61,13 +71,22 @@ class WickedHexagon {
     this.cursor.animate(this.ctx);
     this.walls.animate(this.ctx);
 
+    if (this.gameOver() === true) {
+      this.running = false;
+      this.gameOverAudio.play();
+      this.music.pause();
+      this.stopwatch.stop();
+      this.hexagon.stop();
+      clearInterval(this.populateWalls);
+    }
+
     if (this.cursorDir === 'clockwise') {
       this.cursor.pivotClockwise(deltaTime, this.ctx);
     } else if (this.cursorDir === 'counterClockwise') {
       this.cursor.pivotCounterClockwise(deltaTime, this.ctx);
     }
 
-    if (this.running = true) {
+    if (this.running === true) {
       requestAnimationFrame(this.animate.bind(this));
     }
   }
@@ -86,7 +105,6 @@ class WickedHexagon {
         }
       } else if (event.keyCode === 32) {
         console.log('space');
-        that.running = true;
         that.play();
       }
     });
@@ -94,12 +112,16 @@ class WickedHexagon {
     document.addEventListener("keyup", () => (that.cursorDir = ''));
   }
 
-  restart() {
+  gameOver() {
+    return this.walls.collidesWith(this.cursor.tip());
+  }
+
+  drawPregame() {
 
   }
 
-  gameOver() {
-    this.running = false;
+  drawPostgame() {
+
   }
 }
 

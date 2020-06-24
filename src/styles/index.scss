@@ -17,16 +17,21 @@ html, body {
 
     .time-word {
       color: white;
+      display: inline-block;
       font-size: 36px;
-      position: absolute;
-      left: 30px;
+      margin-right: 200px;
+      right: -30px;
+      position: relative;
+      padding-right: 50px;
       transform: skewX(-45deg);
     }
 
     div.inner-container {
       background-color: black;
+      display: flex;
+      justify-content: flex-end;
       height: 54px;
-      min-width: 160px;
+      min-width: 180px;
       position: absolute;
       right: 10px;
       transform: none;
@@ -35,10 +40,8 @@ html, body {
         background-color: #000000;
         display: inline-block;
         font-size: 50px;
-        position: relative;
-        right: -30px;
-        margin-left: 10px;
-        margin-right: 10px;
+        padding-right: 40px;
+        margin-left: 20px;
         transform: skewX(-45deg);
       }
     }
