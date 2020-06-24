@@ -5,6 +5,15 @@ import Sections from './sections';
 import Walls from './walls';
 // import the other scripts
 
+const COLORS = [
+  // base, sections, cursor/walls   ~ // black to color // white to color
+  ["#000000", "#022713", "#08fb7b"],    // black/green
+  ["#000000", "#261501", "#ef8708"],    // black/orange
+  ["#ffffff", "#f5dcf0", "#c31e9e"],    // white/pink
+  ["#ffffff", "#e7e3f7", "#6b4aca"],    // white/purple
+  ["#ffffff", "#dde8fc", "#2b6aea"],    // white/blue
+]
+
 class WickedHexagon {
   constructor(canvas) {
     this.canvas = canvas;
@@ -36,8 +45,8 @@ class WickedHexagon {
 
     this.walls = new Walls(this.canvas);
 
-    // comment back in later
-    this.music.play();
+    // // comment back in later
+    // this.music.play();
   }
   
   animate(timestamp) {

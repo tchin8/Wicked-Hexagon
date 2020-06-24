@@ -28,7 +28,7 @@ class Walls {
 
     this.wallCombos = [];
     
-    setInterval(() => this.populateWalls(), 2000);
+    setInterval(() => this.populateWalls(), 1000);
   }
 
   draw (ctx, combo) {

@@ -45,12 +45,12 @@ export default class Cursor {
   }
 
   pivotClockwise(deltaTime, ctx) {
-    this.angle += (60 / deltaTime);
+    this.angle += (120 / deltaTime);
     this.draw(ctx)
   }
 
   pivotCounterClockwise(deltaTime, ctx) {
-    this.angle -= (60 / deltaTime);
+    this.angle -= (120 / deltaTime);
     this.draw(ctx);
   }
 }
