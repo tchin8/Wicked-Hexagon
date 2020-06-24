@@ -1,5 +1,10 @@
 const DEFAULTS = {
-  COLORS: ["#000000", "#ffffff"],
+  COLORS: [
+    ["#000000", "#ffffff"],
+    ["#ffffff", "#ef8708"],
+    ["#ffffff", "#6b4aca"],
+    ["#ffffff", "#2b6aea"],
+  ],
 }
 
 class Stopwatch {

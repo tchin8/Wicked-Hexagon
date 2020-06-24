@@ -7,7 +7,7 @@ html, body {
   overflow-y: hidden; 
 
   div.container {
-    background-color: black;
+    background-color: #c31e9e;
     height: 38px;
     min-width: 270px;
     position: absolute;
@@ -27,7 +27,7 @@ html, body {
     }
 
     div.inner-container {
-      background-color: black;
+      background-color: #c31e9e;
       display: flex;
       justify-content: flex-end;
       height: 54px;
@@ -37,7 +37,7 @@ html, body {
       transform: none;
      
       .stopwatch {
-        background-color: #000000;
+        background-color: #c31e9e;
         display: inline-block;
         font-size: 50px;
         padding-right: 40px;

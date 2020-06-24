@@ -1,7 +1,14 @@
 const DEFAULTS = {
-  COLORS: ["#000000", "#08fb7b"],
+  COLORS: [
+    ["#000000", "#08fb7b"],
+    ["#000000", "#ef8708"],
+    ["#ffffff", "#c31e9e"],
+    ["#ffffff", "#6b4aca"],
+    ["#ffffff", "#2b6aea"],
+  ],
   SIZE: 50,
 }
+
 
 class Hexagon {
   constructor(canvas) {
@@ -26,7 +33,7 @@ class Hexagon {
       ctx.lineTo(this.x + DEFAULTS.SIZE * Math.cos(hex1 * 2 * Math.PI / 6), this.y + DEFAULTS.SIZE * Math.sin(hex1 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = DEFAULTS.COLORS[1];
+    ctx.fillStyle = DEFAULTS.COLORS[2][1];
     ctx.fill();
 
     ctx.beginPath();
@@ -37,7 +44,7 @@ class Hexagon {
       ctx.lineTo(this.x + 44 * Math.cos(hex2 * 2 * Math.PI / 6), this.y + 44 * Math.sin(hex2 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = DEFAULTS.COLORS[0];
+    ctx.fillStyle = DEFAULTS.COLORS[2][0];
     ctx.fill();
   }
 

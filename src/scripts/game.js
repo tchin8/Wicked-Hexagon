@@ -24,7 +24,6 @@ class WickedHexagon {
     this.y = canvas.height;
 
     this.registerEvents();
-    this.restart();
 
     this.sections = new Sections(canvas);
     this.ctx.globalCompositeOperation = 'source-over';
@@ -50,15 +49,11 @@ class WickedHexagon {
     this.walls = new Walls(this.canvas);
 
     this.beginAudio.play();
-    this.populateWalls = setInterval(() => this.walls.populateWalls(), 1000);
+    this.populateWalls = setInterval(() => this.walls.populateWalls(), 800);
+    this.music.load();
     this.music.play();
   }
 
-
-  restart() {
-    
-  }
-  
   animate(timestamp) {
     let deltaTime = timestamp - this.lastTime;
 
@@ -104,7 +99,6 @@ class WickedHexagon {
           that.cursorDir = 'clockwise';
         }
       } else if (event.keyCode === 32) {
-        console.log('space');
         that.play();
       }
     });

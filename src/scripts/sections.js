@@ -1,5 +1,11 @@
 const DEFAULTS = {
-  COLORS: ["#000000", "#022713"],
+  COLORS: [
+    ["#000000", "#022713"],
+    ["#000000", "#261501"],
+    ["#ffffff", "#f5dcf0"],
+    ["#ffffff", "#e7e3f7"],
+    ["#ffffff", "#dde8fc"],
+  ],
 }
 
 export default class Sections {
@@ -34,8 +40,8 @@ export default class Sections {
       if (prevCoord !== undefined) {
         ctx.lineTo(...prevCoord);
       }
-      ctx.strokeStyle = DEFAULTS.COLORS[i % 2];
-      ctx.fillStyle = DEFAULTS.COLORS[i % 2];
+      ctx.strokeStyle = DEFAULTS.COLORS[2][i % 2];
+      ctx.fillStyle = DEFAULTS.COLORS[2][i % 2];
       ctx.fill();
       ctx.stroke();
 

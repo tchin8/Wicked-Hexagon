@@ -1,5 +1,11 @@
 const DEFAULTS = {
-  COLORS: ["#08fb7b", 'rgba(0,0,0,0)'],
+  COLORS: [
+    ["#08fb7b", 'rgba(0,0,0,0)'],
+    ["#ef8708", 'rgba(0,0,0,0)'],
+    ["#c31e9e", 'rgba(0,0,0,0)'],
+    ["#6b4aca", 'rgba(0,0,0,0)'],
+    ["#2b6aea", 'rgba(0,0,0,0)'],
+  ],
   // second color is transparent
   SIZE: 40,
   MAX: 1000,
@@ -23,7 +29,8 @@ class Walls {
       [true, false, true, true, true, true],
       [false, true, true, true, true, true],
       [true, false, true, false, true, false],
-      [true, true, false, true, true, false],     // 8 combos
+      [false, true, false, true, false, true],
+      [true, true, false, true, true, false],
     ]
 
     this.wallCombos = [];
@@ -65,11 +72,12 @@ class Walls {
       }
 
         if (i === -1 || combo[i] === false) {
-          ctx.strokeStyle = DEFAULTS.COLORS[1];
-          ctx.fillStyle = DEFAULTS.COLORS[1];
+          debugger;
+          ctx.strokeStyle = DEFAULTS.COLORS[2][1];
+          ctx.fillStyle = DEFAULTS.COLORS[2][1];
         } else if (combo[i]) {
-          ctx.strokeStyle = DEFAULTS.COLORS[0];
-          ctx.fillStyle = DEFAULTS.COLORS[0];
+          ctx.strokeStyle = DEFAULTS.COLORS[2][0];
+          ctx.fillStyle = DEFAULTS.COLORS[2][0];
         }
 
       ctx.fill();
@@ -129,7 +137,7 @@ class Walls {
   }
 
   populateWalls() {
-    let combosIdx = Math.floor(Math.random() * 8);
+    let combosIdx = Math.floor(Math.random() * this.combos.length);
     let combo = this.combos[combosIdx];
 
     this.draw(this.ctx, combo);
@@ -185,11 +193,11 @@ class Walls {
           }
   
           if (wall.isWall === true) {
-            ctx.strokeStyle = DEFAULTS.COLORS[0];
-            ctx.fillStyle = DEFAULTS.COLORS[0];
+            ctx.strokeStyle = DEFAULTS.COLORS[2][0];
+            ctx.fillStyle = DEFAULTS.COLORS[2][0];
           } else if (wall.isWall === false) {
-            ctx.strokeStyle = DEFAULTS.COLORS[1];
-            ctx.fillStyle = DEFAULTS.COLORS[1];
+            ctx.strokeStyle = DEFAULTS.COLORS[2][1];
+            ctx.fillStyle = DEFAULTS.COLORS[2][1];
           }
   
           ctx.fill();
