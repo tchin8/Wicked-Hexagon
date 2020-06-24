@@ -2,6 +2,7 @@ import Stopwatch from './stopwatch';
 import Hexagon from './hexagon';
 import Cursor from './cursor';
 import Sections from './sections';
+import Walls from './walls';
 // import the other scripts
 
 class WickedHexagon {
@@ -20,6 +21,8 @@ class WickedHexagon {
     this.stopwatch = new Stopwatch(canvas);
     this.hexagon = new Hexagon(canvas);
     this.cursor = new Cursor(canvas);
+
+    this.walls = new Walls(canvas);
 
     this.cursorDir = '';
     this.music = new Audio('assets/sounds/Cusp.mp3');
@@ -48,6 +51,9 @@ class WickedHexagon {
     this.sections.animate(deltaTime);
     this.hexagon.animate(deltaTime);
     this.cursor.animate(this.ctx);
+    this.walls.animate();
+
+    setTimeout(() => this.walls.populateWalls(), 1000);
 
     if (this.cursorDir === 'clockwise') {
       this.cursor.pivotClockwise(deltaTime, this.ctx);

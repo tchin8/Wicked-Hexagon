@@ -3,7 +3,7 @@ const DEFAULTS = {
   SIZE: 50,
 }
 
-export default class Hexagon {
+class Hexagon {
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.x = canvas.width / 2;
@@ -46,3 +46,5 @@ export default class Hexagon {
     this.draw(this.ctx);
   }
 }
+
+export default Hexagon;

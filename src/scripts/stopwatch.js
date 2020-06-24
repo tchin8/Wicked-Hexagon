@@ -2,7 +2,7 @@ const DEFAULTS = {
   COLORS: ["#000000", "#ffffff"],
 }
 
-export default class Stopwatch {
+class Stopwatch {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
@@ -37,3 +37,5 @@ export default class Stopwatch {
     this.draw(this.ctx);
   }
 }
+
+export default Stopwatch;

@@ -16,24 +16,15 @@ export default class Sections {
   draw(ctx) {
     let prevCoord;
 
-    // ctx.translate(this.x, this.y);
-    // ctx.rotate(this.angle * Math.PI / 180);
-    // ctx.translate(-this.x, -this.y);
     for (let i = 0; i <= 6; i++) {
       if (i !== 0) {
         this.angle = this.angle + 60;
       }
 
-      // if (this.angle < 0) {
-      //   this.angle = 360 - this.angle;
-      // } else if (this.angle > 360) {
-      //   this.angle = this.angle % 360;
-      // }
-
       let x2, y2, length;
 
       // length = Math.floor(Math.sqrt(3) * this.x * 2);
-      length = 2000;
+      length = 500;
       x2 = this.x + Math.cos(Math.PI * this.angle / 180) * length;
       y2 = this.y + Math.sin(Math.PI * this.angle / 180) * length;
 
