@@ -72,7 +72,6 @@ class Walls {
       }
 
         if (i === -1 || combo[i] === false) {
-          debugger;
           ctx.strokeStyle = DEFAULTS.COLORS[2][1];
           ctx.fillStyle = DEFAULTS.COLORS[2][1];
         } else if (combo[i]) {

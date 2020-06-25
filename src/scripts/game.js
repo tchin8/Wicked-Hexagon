@@ -36,6 +36,25 @@ class WickedHexagon {
     this.music = new Audio('assets/sounds/Cusp.mp3');
     this.beginAudio = new Audio('assets/sounds/begin.mp3');
     this.gameOverAudio = new Audio('assets/sounds/game_over.mp3');
+
+    this.beforeGame(this.ctx);
+  }
+
+  beforeGame(ctx) {
+    let that = this;
+
+    let f = new FontFace('Squada One', 'url(https://fonts.gstatic.com/s/squadaone/v8/BCasqZ8XsOrx4mcOk6Mtaac2WRJnDgo.woff2)');
+
+    f.load().then(function () {
+      ctx.beginPath();
+      ctx.rect(that.x/2 - 150, that.y/2 - 150, 300, 80);
+      ctx.strokeStyle = "#c31e9e";
+      ctx.stroke();
+      ctx.fill();
+      ctx.font = "30px Squada One";
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText("SPACE TO PLAY", that.x / 2 - 120, that.y / 2 - 100);
+    });
   }
 
   play() {
