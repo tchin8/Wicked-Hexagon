@@ -47,13 +47,13 @@ class WickedHexagon {
 
     f.load().then(function () {
       ctx.beginPath();
-      ctx.rect(that.x/2 - 150, that.y/2 - 150, 300, 80);
+      ctx.rect(that.x/2 - 100, that.y/2 - 150, 200, 80);
       ctx.strokeStyle = "#c31e9e";
       ctx.stroke();
       ctx.fill();
       ctx.font = "30px Squada One";
       ctx.fillStyle = "#ffffff";
-      ctx.fillText("SPACE TO PLAY", that.x / 2 - 120, that.y / 2 - 100);
+      ctx.fillText("SPACE TO PLAY", that.x / 2 - 80, that.y / 2 - 100);
     });
   }
 
