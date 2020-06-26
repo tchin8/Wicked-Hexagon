@@ -79,6 +79,7 @@ class Walls {
           ctx.fillStyle = DEFAULTS.COLORS[2][0];
         }
 
+      ctx.closePath();
       ctx.fill();
       ctx.stroke();
 
@@ -101,7 +102,7 @@ class Walls {
     this.wallCombos.push(walls);
   }
 
-  collidesWith(cursorPos) {
+  collidesWith(cursorPos, scale) {
     if (this.wallCombos.length !== 0) {
       for (let j = 0; j < this.wallCombos.length; j++) {
         let walls = this.wallCombos[j];
@@ -117,7 +118,7 @@ class Walls {
             let length1 = this.getDistance(x, y, ax, ay);
             let length2 = this.getDistance(x, y, bx, by);
             
-            if (length1 + length2 <= wall.length - 39) {
+            if (length1 + length2 <= (wall.length * scale)-39) {
               return true;
             }
           }
@@ -142,7 +143,7 @@ class Walls {
     this.draw(this.ctx, combo);
   }
 
-  animate(ctx) {
+  animate(ctx, scale) {
     if (this.wallCombos.length !== 0 && this.wallCombos[this.wallCombos.length - 1].length % 7 === 0) {
       
       for (let i = 0; i < this.wallCombos.length; i++) {
@@ -170,12 +171,12 @@ class Walls {
   
           newLength = wall.length - 5;
   
-          x2 = this.x + Math.cos(Math.PI * this.animateWallAngle / 180) * newLength;
-          y2 = this.y + Math.sin(Math.PI * this.animateWallAngle / 180) * newLength;
+          x2 = this.x + Math.cos(Math.PI * this.animateWallAngle / 180) * (newLength * scale);
+          y2 = this.y + Math.sin(Math.PI * this.animateWallAngle / 180) * (newLength * scale);
   
           // tapezoid point on first line 
-          bx = this.x + Math.cos(Math.PI * this.animateWallAngle / 180) * (newLength - DEFAULTS.SIZE);
-          by = this.y + Math.sin(Math.PI * this.animateWallAngle / 180) * (newLength - DEFAULTS.SIZE);
+          bx = this.x + Math.cos(Math.PI * this.animateWallAngle / 180) * ((newLength * scale) - DEFAULTS.SIZE);
+          by = this.y + Math.sin(Math.PI * this.animateWallAngle / 180) * ((newLength * scale) - DEFAULTS.SIZE);
   
           ctx.beginPath();
           ctx.moveTo(bx, by);

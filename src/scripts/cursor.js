@@ -22,15 +22,17 @@ export default class Cursor {
     this.draw(this.ctx);
   }
 
-  tip() {
-    let x = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS + DEFAULTS.SIZE));
-    let y = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS + DEFAULTS.SIZE));
+  tip(scale) {
+    let x = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * ((DEFAULTS.RADIUS * scale) + DEFAULTS.SIZE));
+    let y = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * ((DEFAULTS.RADIUS * scale) + DEFAULTS.SIZE));
     return [x, y];
   }
 
-  draw(ctx) {
-    this.cursorX = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
-    this.cursorY = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * DEFAULTS.RADIUS);
+  draw(ctx, scale) {
+    scale = scale || 1;
+
+    this.cursorX = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS * scale));
+    this.cursorY = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS * scale));
 
     ctx.translate(this.cursorX, this.cursorY);
     ctx.rotate(this.angle * Math.PI / 180);
@@ -48,17 +50,17 @@ export default class Cursor {
     ctx.translate(-this.cursorX, -this.cursorY);
   }
 
-  animate(ctx) {
-    this.draw(ctx);
+  animate(ctx, scale) {
+    this.draw(ctx, scale);
   }
 
-  pivotClockwise(deltaTime, ctx) {
+  pivotClockwise(deltaTime, ctx, scale) {
     this.angle += (150 / deltaTime);
-    this.draw(ctx)
+    this.draw(ctx, scale);
   }
 
-  pivotCounterClockwise(deltaTime, ctx) {
+  pivotCounterClockwise(deltaTime, ctx, scale) {
     this.angle -= (150 / deltaTime);
-    this.draw(ctx);
+    this.draw(ctx, scale);
   }
 }

@@ -22,22 +22,8 @@ class Stopwatch {
     stopwatch[0].innerHTML += `${this.time}`;
   }
 
-  countDecimals(num) {
-    if (Math.floor(num) !== num) {
-      return num.toString().split(".")[1].length || 0;
-    }
-    return 0;
-  }
-
-  animate(startTime) {
-    const now = new Date();
-    this.time = Math.round(((now - startTime) / 1000) * 100) / 100;
-
-    if (this.countDecimals(this.time) === 0) {
-      this.time = `${this.time}.00`;
-    } else if (this.countDecimals(this.time) === 1) {
-      this.time = `${this.time}0`;
-    }
+  animate(time) {
+    this.time = time;
 
     this.draw(this.ctx);
   }

@@ -22,12 +22,11 @@ class WickedHexagon {
     this.running = false;
     this.x = canvas.width;
     this.y = canvas.height;
+    this.scale = 1;
+    this.scaleDir = "";
+    this.rotationDir = 1;
 
     this.registerEvents();
-
-    // this.ctx.setTransform(3, 0, 0, 3, -this.x, -this.y);
-    // this.ctx.setTransform(2, 0, 0, 2, -this.x/2, -this.y/2);
-    // this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     this.sections = new Sections(canvas);
     this.ctx.globalCompositeOperation = 'source-over';
@@ -51,13 +50,15 @@ class WickedHexagon {
 
     f.load().then(function () {
       ctx.beginPath();
-      ctx.rect(that.x/2 - 100, that.y/2 - 150, 200, 80);
+      ctx.rect(that.x/2 - 120, that.y/2 - 200, 240, 120);
       ctx.strokeStyle = "#c31e9e";
       ctx.stroke();
       ctx.fill();
       ctx.font = "30px Squada One";
       ctx.fillStyle = "#ffffff";
-      ctx.fillText("SPACE TO PLAY", that.x / 2 - 80, that.y / 2 - 100);
+      ctx.fillText("SPACE TO PLAY", that.x / 2 - 80, that.y / 2 - 160);
+      ctx.fillText("LEFT/RIGHT OR A/D", that.x / 2 - 96, that.y / 2 - 120);
+      ctx.fillText("TO AVOID WALLS", that.x / 2 - 86, that.y / 2 - 90);
     });
   }
 
@@ -65,7 +66,6 @@ class WickedHexagon {
     this.running = true;
     let timestamp = new Date()
     this.lastTime = 0;
-    this.startTime = new Date();
 
     setTimeout(() => this.animate(timestamp), 300);
 
@@ -73,21 +73,75 @@ class WickedHexagon {
 
     this.beginAudio.play();
     this.populateWalls = setInterval(() => this.walls.populateWalls(), 800);
+
+    setTimeout(() => {
+      this.startTime = new Date();
+    }, 400);
+
+    let rand = Math.floor(Math.random() * 10) + 1;
+
+    setTimeout(() => {
+      setInterval(() => this.updateRotation(), rand * 500);
+    }, 10000)
+
     this.music.load();
     this.music.play();
   }
 
+  updateRotation() {
+    if (this.rotationDir === 1) {
+      this.rotationDir = -1;
+    } else {
+      this.rotationDir = 1;
+    }
+  }
+
+  updateScale() {
+    if (this.scale <= 1) {
+      this.scaleDir = "increasing";
+    } else if (this.scale >= 1.5) {
+      this.scaleDir = "decreasing";
+    }
+
+    if (this.scaleDir === "increasing") {
+      this.scale += 0.04;
+    } else if (this.scaleDir === "decreasing") {
+      this.scale -= 0.04;
+    }
+  }
+
+  countDecimals(num) {
+    if (Math.floor(num) !== num) {
+      return num.toString().split(".")[1].length || 0;
+    }
+    return 0;
+  }
+
   animate(timestamp) {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     let deltaTime = timestamp - this.lastTime;
 
     this.deltaTime = deltaTime;
     this.lastTime = timestamp;
 
-    this.stopwatch.animate(this.startTime);
+    if (this.startTime) {
+      const now = new Date();
+      this.time = Math.round(((now - this.startTime) / 1000) * 100) / 100;
+  
+      if (this.countDecimals(this.time) === 0) {
+        this.time = `${this.time}.00`;
+      } else if (this.countDecimals(this.time) === 1) {
+        this.time = `${this.time}0`;
+      }
+
+      this.stopwatch.animate(this.time);
+    }
+
     this.sections.animate(deltaTime);
-    this.hexagon.animate(deltaTime);
-    this.cursor.animate(this.ctx);
-    this.walls.animate(this.ctx);
+    debugger;
+    this.hexagon.animate(deltaTime, this.scale, this.rotationDir);
+    this.cursor.animate(this.ctx, this.scale);
+    this.walls.animate(this.ctx, this.scale);
 
     if (this.gameOver() === true) {
       this.running = false;
@@ -99,9 +153,13 @@ class WickedHexagon {
     }
 
     if (this.cursorDir === 'clockwise') {
-      this.cursor.pivotClockwise(deltaTime, this.ctx);
+      this.cursor.pivotClockwise(deltaTime, this.ctx, this.scale);
     } else if (this.cursorDir === 'counterClockwise') {
-      this.cursor.pivotCounterClockwise(deltaTime, this.ctx);
+      this.cursor.pivotCounterClockwise(deltaTime, this.ctx, this.scale);
+    }
+
+    if (this.time && this.time > 41) {
+      this.updateScale();
     }
 
     if (this.running === true) {
@@ -130,16 +188,9 @@ class WickedHexagon {
   }
 
   gameOver() {
-    return this.walls.collidesWith(this.cursor.tip());
+    return this.walls.collidesWith(this.cursor.tip(this.scale), this.scale);
   }
 
-  drawPregame() {
-
-  }
-
-  drawPostgame() {
-
-  }
 }
 
 export default WickedHexagon;
