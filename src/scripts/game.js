@@ -138,7 +138,6 @@ class WickedHexagon {
     }
 
     this.sections.animate(deltaTime);
-    debugger;
     this.hexagon.animate(deltaTime, this.scale, this.rotationDir);
     this.cursor.animate(this.ctx, this.scale);
     this.walls.animate(this.ctx, this.scale);
