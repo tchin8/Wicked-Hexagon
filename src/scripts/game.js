@@ -62,12 +62,21 @@ class WickedHexagon {
     });
   }
 
+  afterGame() {
+    let div = document.getElementsByClassName('game-over');
+    div[0].classList.remove('hidden');
+  }
+
   play() {
+    let div = document.getElementsByClassName('game-over');
+    div[0].classList.add('hidden');
+
     this.running = true;
     let timestamp = new Date()
     this.lastTime = 0;
 
     setTimeout(() => this.animate(timestamp), 300);
+
 
     this.walls = new Walls(this.canvas);
 
@@ -80,8 +89,8 @@ class WickedHexagon {
 
     let rand = Math.floor(Math.random() * 10) + 1;
 
-    setTimeout(() => {
-      setInterval(() => this.updateRotation(), rand * 500);
+    this.rotationTimeout = setTimeout(() => {
+      this.rotationInterval = setInterval(() => this.updateRotation(), rand * 500);
     }, 10000)
 
     this.music.load();
@@ -142,6 +151,13 @@ class WickedHexagon {
     this.cursor.animate(this.ctx, this.scale);
     this.walls.animate(this.ctx, this.scale);
 
+    
+    if (this.cursorDir === 'clockwise') {
+      this.cursor.pivotClockwise(deltaTime, this.ctx, this.scale);
+    } else if (this.cursorDir === 'counterClockwise') {
+      this.cursor.pivotCounterClockwise(deltaTime, this.ctx, this.scale);
+    }
+
     if (this.gameOver() === true) {
       this.running = false;
       this.gameOverAudio.play();
@@ -149,12 +165,9 @@ class WickedHexagon {
       this.stopwatch.stop();
       this.hexagon.stop();
       clearInterval(this.populateWalls);
-    }
-
-    if (this.cursorDir === 'clockwise') {
-      this.cursor.pivotClockwise(deltaTime, this.ctx, this.scale);
-    } else if (this.cursorDir === 'counterClockwise') {
-      this.cursor.pivotCounterClockwise(deltaTime, this.ctx, this.scale);
+      clearInterval(this.rotationInterval);
+      clearTimeout(this.rotationTimeout);
+      this.afterGame();
     }
 
     if (this.time && this.time > 41) {
