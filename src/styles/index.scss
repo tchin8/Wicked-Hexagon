@@ -55,8 +55,28 @@ html, body {
         transform: skewX(-45deg);
       }
     }
-
   }
 
+  div.game-over {
+    background-color: #c31e9e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    height: 100px;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    width: 220px;
+
+    span {
+      display: block;
+      padding-top: 10px;
+    }
+  }
+
+  div.game-over.hidden {
+    display: none;
+  }
 }
 
