@@ -87,11 +87,12 @@ class WickedHexagon {
       this.startTime = new Date();
     }, 400);
 
-    let rand = Math.floor(Math.random() * 10) + 1;
+    // let rand = Math.floor(Math.random() * 10) + 1;
 
-    this.rotationTimeout = setTimeout(() => {
-      this.rotationInterval = setInterval(() => this.updateRotation(), rand * 500);
-    }, 10000)
+    this.rotationTimeout = setTimeout(() => this.updateRotation(), 10000)
+    // this.rotationTimeout = setTimeout(() => {
+    //   this.rotationInterval = setInterval(() => this.updateRotation(), rand * 500);
+    // }, 10000)
 
     this.music.load();
     this.music.play();
@@ -103,6 +104,9 @@ class WickedHexagon {
     } else {
       this.rotationDir = 1;
     }
+
+    let rand = Math.floor(Math.random() * 10) + 1;
+    this.rotationInterval = setTimeout(() => this.updateRotation(), rand * 500);
   }
 
   updateScale() {
