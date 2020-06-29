@@ -51,7 +51,7 @@ class WickedHexagon {
     f.load().then(function () {
       ctx.beginPath();
       ctx.rect(that.x/2 - 120, that.y/2 - 200, 240, 120);
-      ctx.strokeStyle = "#c31e9e";
+      ctx.strokeStyle = "#2b6aea";
       ctx.stroke();
       ctx.fill();
       ctx.font = "30px Squada One";
@@ -87,12 +87,7 @@ class WickedHexagon {
       this.startTime = new Date();
     }, 400);
 
-    // let rand = Math.floor(Math.random() * 10) + 1;
-
     this.rotationTimeout = setTimeout(() => this.updateRotation(), 10000)
-    // this.rotationTimeout = setTimeout(() => {
-    //   this.rotationInterval = setInterval(() => this.updateRotation(), rand * 500);
-    // }, 10000)
 
     this.music.load();
     this.music.play();
@@ -112,14 +107,14 @@ class WickedHexagon {
   updateScale() {
     if (this.scale <= 1) {
       this.scaleDir = "increasing";
-    } else if (this.scale >= 1.5) {
+    } else if (this.scale >= 1.3) {
       this.scaleDir = "decreasing";
     }
 
     if (this.scaleDir === "increasing") {
-      this.scale += 0.04;
+      this.scale += 0.025;
     } else if (this.scaleDir === "decreasing") {
-      this.scale -= 0.04;
+      this.scale -= 0.025;
     }
   }
 
@@ -174,7 +169,7 @@ class WickedHexagon {
       this.afterGame();
     }
 
-    if (this.time && this.time > 41) {
+    if (this.time && this.time > 41.2) {
       this.updateScale();
     }
 

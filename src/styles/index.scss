@@ -17,7 +17,7 @@ html, body {
   overflow-y: hidden; 
 
   div.container {
-    background-color: #c31e9e;
+    background-color: #2b6aea;
     height: 38px;
     min-width: 270px;
     position: absolute;
@@ -37,7 +37,7 @@ html, body {
     }
 
     div.inner-container {
-      background-color: #c31e9e;
+      background-color: #2b6aea;
       display: flex;
       justify-content: flex-end;
       height: 54px;
@@ -47,7 +47,7 @@ html, body {
       transform: none;
      
       .stopwatch {
-        background-color: #c31e9e;
+        background-color: #2b6aea;
         display: inline-block;
         font-size: 50px;
         padding-right: 40px;
@@ -58,7 +58,7 @@ html, body {
   }
 
   div.game-over {
-    background-color: #c31e9e;
+    background-color: #2b6aea;
     display: flex;
     flex-direction: column;
     align-items: center;

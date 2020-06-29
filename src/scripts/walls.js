@@ -72,11 +72,11 @@ class Walls {
       }
 
         if (i === -1 || combo[i] === false) {
-          ctx.strokeStyle = DEFAULTS.COLORS[2][1];
-          ctx.fillStyle = DEFAULTS.COLORS[2][1];
+          ctx.strokeStyle = DEFAULTS.COLORS[4][1];
+          ctx.fillStyle = DEFAULTS.COLORS[4][1];
         } else if (combo[i]) {
-          ctx.strokeStyle = DEFAULTS.COLORS[2][0];
-          ctx.fillStyle = DEFAULTS.COLORS[2][0];
+          ctx.strokeStyle = DEFAULTS.COLORS[4][0];
+          ctx.fillStyle = DEFAULTS.COLORS[4][0];
         }
 
       ctx.closePath();
@@ -193,11 +193,11 @@ class Walls {
           }
   
           if (wall.isWall === true) {
-            ctx.strokeStyle = DEFAULTS.COLORS[2][0];
-            ctx.fillStyle = DEFAULTS.COLORS[2][0];
+            ctx.strokeStyle = DEFAULTS.COLORS[4][0];
+            ctx.fillStyle = DEFAULTS.COLORS[4][0];
           } else if (wall.isWall === false) {
-            ctx.strokeStyle = DEFAULTS.COLORS[2][1];
-            ctx.fillStyle = DEFAULTS.COLORS[2][1];
+            ctx.strokeStyle = DEFAULTS.COLORS[4][1];
+            ctx.fillStyle = DEFAULTS.COLORS[4][1];
           }
   
           ctx.fill();

@@ -40,8 +40,8 @@ export default class Sections {
       if (prevCoord !== undefined) {
         ctx.lineTo(...prevCoord);
       }
-      ctx.strokeStyle = DEFAULTS.COLORS[2][i % 2];
-      ctx.fillStyle = DEFAULTS.COLORS[2][i % 2];
+      ctx.strokeStyle = DEFAULTS.COLORS[4][i % 2];
+      ctx.fillStyle = DEFAULTS.COLORS[4][i % 2];
       ctx.fill();
       ctx.stroke();
 

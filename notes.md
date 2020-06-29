@@ -1,3 +1,10 @@
+# goals
+- color transitions
+https://stackoverflow.com/questions/29447306/transition-on-fillstyle-color
+
+- game over centered?
+
+
 # cursor.js
 
 draw(ctx) {
@@ -30,6 +37,7 @@ draw(ctx) {
 }
 
 https://stackoverflow.com/questions/54915438/draw-a-line-with-specific-angle-in-a-html-canvas
+
 
 
 

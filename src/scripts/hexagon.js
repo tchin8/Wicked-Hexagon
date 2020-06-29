@@ -34,7 +34,7 @@ class Hexagon {
       ctx.lineTo(this.x + (DEFAULTS.SIZE * scale) * Math.cos(hex1 * 2 * Math.PI / 6), this.y + (DEFAULTS.SIZE * scale) * Math.sin(hex1 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = DEFAULTS.COLORS[2][1];
+    ctx.fillStyle = DEFAULTS.COLORS[4][1];
     ctx.fill();
 
     ctx.beginPath();
@@ -45,7 +45,7 @@ class Hexagon {
       ctx.lineTo(this.x + (44 * scale) * Math.cos(hex2 * 2 * Math.PI / 6), this.y + (44 * scale) * Math.sin(hex2 * 2 * Math.PI / 6));
     }
 
-    ctx.fillStyle = DEFAULTS.COLORS[2][0];
+    ctx.fillStyle = DEFAULTS.COLORS[4][0];
     ctx.fill();
   }
 

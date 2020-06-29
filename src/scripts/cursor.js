@@ -42,7 +42,7 @@ export default class Cursor {
     ctx.moveTo(this.cursorX - DEFAULTS.SIZE, this.cursorY - DEFAULTS.SIZE);
     ctx.lineTo(this.cursorX + DEFAULTS.SIZE, this.cursorY);
     ctx.lineTo(this.cursorX - DEFAULTS.SIZE, this.cursorY + DEFAULTS.SIZE);
-    ctx.fillStyle = DEFAULTS.COLORS[2];
+    ctx.fillStyle = DEFAULTS.COLORS[4];
     ctx.fill();
 
     ctx.translate(this.cursorX, this.cursorY);
