@@ -16,6 +16,26 @@ html, body {
   overflow-x: hidden; 
   overflow-y: hidden; 
 
+  div.links {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+
+    a {
+      text-decoration: none;
+
+      i {
+        font-size: 40px;
+        color: #000000;
+        margin-right: 20px;
+      }
+  
+      i:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   div.container {
     background-color: #2b6aea;
     height: 38px;
