@@ -49,7 +49,7 @@ class Walls {
       }
 
       let x2, y2, ax, ay, bx, by;
-      // outter trapezoid corner
+      // outer trapezoid corner
       x2 = this.x + Math.cos(Math.PI * this.angle / 180) * DEFAULTS.MAX;
       y2 = this.y + Math.sin(Math.PI * this.angle / 180) * DEFAULTS.MAX;
 

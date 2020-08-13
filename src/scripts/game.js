@@ -191,7 +191,9 @@ class WickedHexagon {
           that.cursorDir = 'clockwise';
         }
       } else if (event.keyCode === 32) {
-        that.play();
+        if (!that.running) {
+          that.play();
+        }
       }
     });
 
