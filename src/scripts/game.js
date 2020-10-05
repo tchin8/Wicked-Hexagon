@@ -5,6 +5,8 @@ import Sections from './sections';
 import Walls from './walls';
 // import the other scripts
 
+
+// keep for now, to implement color gradients 
 const COLORS = [
   // base, sections, cursor/walls   ~ // black to color // white to color
   ["#000000", "#022713", "#08fb7b"],    // black/green
@@ -62,6 +64,7 @@ class WickedHexagon {
     });
   }
 
+  // show game over text box
   afterGame() {
     let div = document.getElementsByClassName('game-over');
     div[0].classList.remove('hidden');
@@ -76,7 +79,6 @@ class WickedHexagon {
     this.lastTime = 0;
 
     setTimeout(() => this.animate(timestamp), 300);
-
 
     this.walls = new Walls(this.canvas);
 
@@ -93,6 +95,7 @@ class WickedHexagon {
     this.music.play();
   }
 
+  // changes rotation direction
   updateRotation() {
     if (this.rotationDir === 1) {
       this.rotationDir = -1;
@@ -104,6 +107,8 @@ class WickedHexagon {
     this.rotationInterval = setTimeout(() => this.updateRotation(), rand * 500);
   }
 
+  // invoked in animate, updates scale of walls and hexagon
+  // for the pulse effect at 40+ secs
   updateScale() {
     if (this.scale <= 1) {
       this.scaleDir = "increasing";
@@ -125,17 +130,55 @@ class WickedHexagon {
     return 0;
   }
 
+  // provides the scale, rotationDir and time to other scripts
   animate(timestamp) {
+    // clears canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     let deltaTime = timestamp - this.lastTime;
 
     this.deltaTime = deltaTime;
     this.lastTime = timestamp;
 
+    // sets startTime and keeps track of time elapsed
+    this.setTime();
+
+    // invoke animate fx within other scripts to begin game
+    this.sections.animate(deltaTime);
+    this.hexagon.animate(deltaTime, this.scale, this.rotationDir);
+    this.cursor.animate(this.ctx, this.scale);
+    this.walls.animate(this.ctx, this.scale);
+
+    // sets cursor dir
+    this.setDir(deltaTime);
+
+    // conditional that ends game if cursor collides w/ a wall
+    this.gameOver();
+
+    // add pulsating effect when the beat drops :) 
+    if (this.time && this.time > 41.2) {
+      this.updateScale();
+    }
+
+    if (this.running === true) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
+  }
+
+  // invoked in animate
+  setDir(deltaTime) {
+    if (this.cursorDir === "clockwise") {
+      this.cursor.pivotClockwise(deltaTime, this.ctx, this.scale);
+    } else if (this.cursorDir === "counterClockwise") {
+      this.cursor.pivotCounterClockwise(deltaTime, this.ctx, this.scale);
+    }
+  }
+
+  // invoked in animate
+  setTime() {
     if (this.startTime) {
       const now = new Date();
       this.time = Math.round(((now - this.startTime) / 1000) * 100) / 100;
-  
+
       if (this.countDecimals(this.time) === 0) {
         this.time = `${this.time}.00`;
       } else if (this.countDecimals(this.time) === 1) {
@@ -143,38 +186,6 @@ class WickedHexagon {
       }
 
       this.stopwatch.animate(this.time);
-    }
-
-    this.sections.animate(deltaTime);
-    this.hexagon.animate(deltaTime, this.scale, this.rotationDir);
-    this.cursor.animate(this.ctx, this.scale);
-    this.walls.animate(this.ctx, this.scale);
-
-    
-    if (this.cursorDir === 'clockwise') {
-      this.cursor.pivotClockwise(deltaTime, this.ctx, this.scale);
-    } else if (this.cursorDir === 'counterClockwise') {
-      this.cursor.pivotCounterClockwise(deltaTime, this.ctx, this.scale);
-    }
-
-    if (this.gameOver() === true) {
-      this.running = false;
-      this.gameOverAudio.play();
-      this.music.pause();
-      this.stopwatch.stop();
-      this.hexagon.stop();
-      clearInterval(this.populateWalls);
-      clearInterval(this.rotationInterval);
-      clearTimeout(this.rotationTimeout);
-      this.afterGame();
-    }
-
-    if (this.time && this.time > 41.2) {
-      this.updateScale();
-    }
-
-    if (this.running === true) {
-      requestAnimationFrame(this.animate.bind(this));
     }
   }
 
@@ -200,10 +211,20 @@ class WickedHexagon {
     document.addEventListener("keyup", () => (that.cursorDir = ''));
   }
 
+  // invoked in animate
   gameOver() {
-    return this.walls.collidesWith(this.cursor.tip(this.scale), this.scale);
+    if (this.walls.collidesWith(this.cursor.tip(this.scale), this.scale)) {
+      this.running = false;
+      this.gameOverAudio.play();
+      this.music.pause();
+      this.stopwatch.stop();
+      this.hexagon.stop();
+      clearInterval(this.populateWalls);
+      clearInterval(this.rotationInterval);
+      clearTimeout(this.rotationTimeout);
+      this.afterGame();
+    };
   }
-
 }
 
 export default WickedHexagon;

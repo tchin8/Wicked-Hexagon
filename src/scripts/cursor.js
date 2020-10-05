@@ -22,20 +22,32 @@ export default class Cursor {
     this.draw(this.ctx);
   }
 
+  // get location of cursor tip
+  // used in game script, check if tip collided w/ any walls
   tip(scale) {
-    let x = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * ((DEFAULTS.RADIUS * scale) + DEFAULTS.SIZE));
-    let y = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * ((DEFAULTS.RADIUS * scale) + DEFAULTS.SIZE));
+    let x =
+      this.canvas.width / 2 +
+      Math.cos((this.angle * Math.PI) / 180) *
+        (DEFAULTS.RADIUS * scale + DEFAULTS.SIZE);
+    let y =
+      this.canvas.height / 2 +
+      Math.sin((this.angle * Math.PI) / 180) *
+        (DEFAULTS.RADIUS * scale + DEFAULTS.SIZE);
     return [x, y];
   }
 
   draw(ctx, scale) {
     scale = scale || 1;
 
-    this.cursorX = (this.canvas.width / 2) + (Math.cos(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS * scale));
-    this.cursorY = (this.canvas.height / 2) + (Math.sin(this.angle * Math.PI / 180) * (DEFAULTS.RADIUS * scale));
+    this.cursorX =
+      this.canvas.width / 2 +
+      Math.cos((this.angle * Math.PI) / 180) * (DEFAULTS.RADIUS * scale);
+    this.cursorY =
+      this.canvas.height / 2 +
+      Math.sin((this.angle * Math.PI) / 180) * (DEFAULTS.RADIUS * scale);
 
     ctx.translate(this.cursorX, this.cursorY);
-    ctx.rotate(this.angle * Math.PI / 180);
+    ctx.rotate((this.angle * Math.PI) / 180);
     ctx.translate(-this.cursorX, -this.cursorY);
 
     ctx.beginPath();
@@ -46,7 +58,7 @@ export default class Cursor {
     ctx.fill();
 
     ctx.translate(this.cursorX, this.cursorY);
-    ctx.rotate(-this.angle * Math.PI / 180);
+    ctx.rotate((-this.angle * Math.PI) / 180);
     ctx.translate(-this.cursorX, -this.cursorY);
   }
 
@@ -54,13 +66,15 @@ export default class Cursor {
     this.draw(ctx, scale);
   }
 
+  // invoked in game, depends on user's keydown - right, D
   pivotClockwise(deltaTime, ctx, scale) {
-    this.angle += (150 / deltaTime);
+    this.angle += 150 / deltaTime;
     this.draw(ctx, scale);
   }
 
+  // invoked in game, depends on user's keydown - left, A
   pivotCounterClockwise(deltaTime, ctx, scale) {
-    this.angle -= (150 / deltaTime);
+    this.angle -= 150 / deltaTime;
     this.draw(ctx, scale);
   }
 }
