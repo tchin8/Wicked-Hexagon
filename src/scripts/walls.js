@@ -21,6 +21,7 @@ class Walls {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
 
+    // if false, no wall in that section
     this.combos = [
       [true, true, true, true, true, false],
       [true, true, true, true, false, true],
@@ -99,9 +100,12 @@ class Walls {
       walls.push(wall);
     }
 
+    // need to save previous walls to update their length to create pulse
     this.wallCombos.push(walls);
   }
 
+  // invoked in gameOver fx in game
+  // need cursor tip's position to check for collision, thus game over 
   collidesWith(cursorPos, scale) {
     if (this.wallCombos.length !== 0) {
       for (let j = 0; j < this.wallCombos.length; j++) {
@@ -110,6 +114,7 @@ class Walls {
         for (let i = 1; i < walls.length; i++) {
           let wall = walls[i];
   
+          // check if section has wall
           if (wall.isWall) {
             const [x, y] = cursorPos;
             const [ax, ay] = wall.point1;
